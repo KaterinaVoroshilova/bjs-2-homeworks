@@ -1,18 +1,23 @@
 "use strict"
 function solveEquation(a, b, c) {
-  let root = [];
+  let roots = [];
   discriminant = Math.pow(b,2) - 4*a*c;
   if (discriminant > 0) {
-    root[0] = (-b + Math.sqrt(d) )/(2*a);
-    root[1] = (-b - Math.sqrt(d) )/(2*a);
+    roots[0] = (-b + Math.sqrt(d) )/(2*a);
+    roots[1] = (-b - Math.sqrt(d) )/(2*a);
+    return (roots[0], roots[1])
   } 
   else if (discriminant===0) {
-    root[0] = -b/(2*a)
+    roots[0] = -b/(2*a)
+    return roots[0];
   }
-  return root;
+  else {
+  return roots;
+  }
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+
   percent = parseFloat(percent);
   contribution = parseFloat(contribution);
   amount = parseFloat(amount);
@@ -26,9 +31,9 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
     return false;
   }
 
-  const payment = bodyOfCredit * (monthPercent + (monthPercent/(((Math.pow(1+monthPercent,countMonths) - 1)))));
-  const totalLoanAmount = payment * countMonths;
-  totalLoanAmount=parseFloat(totalLoanAmount.toFixed(2));
+  const payment = bodyOfCredit * (monthPercent + monthPercent/(Math.pow(1+monthPercent, countMonths) - 1));
+  let totalLoanAmount = payment * countMonths;
+  totalLoanAmount = parseFloat(totalLoanAmount.toFixed(2));
 
   return totalLoanAmount;
 }
